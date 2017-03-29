@@ -8,4 +8,5 @@
 - 搭建模型
 - 模型评估  
 
-语言为Python,工具主要采用pandas,numpy,matplotlib,sklearn,xgboost等.希望能给刚入门数据比赛的朋友有所帮助.
+语言为Python,工具主要采用pandas,numpy,matplotlib,sklearn,xgboost等.希望能给刚入门数据比赛的朋友有所帮助.  
+建议大家先阅读notebook,里面有较详细的介绍. 比如**data_cleaning.ipynb**.
