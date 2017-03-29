@@ -21,6 +21,7 @@ def get_from_jdata_user():
     return df_usr
 
 
+# apply type count
 def add_type_count(group):
     behavior_type = group.type.astype(int)
     type_cnt = Counter(behavior_type)
@@ -69,16 +70,14 @@ def merge_action_data():
     df_ac = df_ac.groupby(['user_id'], as_index=False).sum()
 
     df_ac['buy_addcart_ratio'] = df_ac['buy_num'] / df_ac['addcart_num']
-    df_ac['buy_addcart_ratio'] = df_ac['buy_addcart_ratio'].fillna(0)
-
     df_ac['buy_browse_ratio'] = df_ac['buy_num'] / df_ac['browse_num']
-    df_ac['buy_browse_ratio'] = df_ac['buy_browse_ratio'].fillna(0)
-
     df_ac['buy_click_ratio'] = df_ac['buy_num'] / df_ac['click_num']
-    df_ac['buy_click_ratio'] = df_ac['buy_click_ratio'].fillna(0)
-
     df_ac['buy_favor_ratio'] = df_ac['buy_num'] / df_ac['favor_num']
-    df_ac['buy_favor_ratio'] = df_ac['buy_favor_ratio'].fillna(0)
+
+    df_ac.ix[df_ac['buy_addcart_ratio'] > 1., 'buy_addcart_ratio'] = 1.
+    df_ac.ix[df_ac['buy_browse_ratio'] > 1., 'buy_browse_ratio'] = 1.
+    df_ac.ix[df_ac['buy_click_ratio'] > 1., 'buy_click_ratio'] = 1.
+    df_ac.ix[df_ac['buy_favor_ratio'] > 1., 'buy_favor_ratio'] = 1.
 
     return df_ac
 
