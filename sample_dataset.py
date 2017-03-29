@@ -14,5 +14,5 @@ file_list = [ACTION_201602_FILE, ACTION_201603_FILE,
 for fname in file_list:
     with open("data_ori/" + fname, 'rb') as fi:
         with open('data/' + fname, 'wb') as fo:
-            for i in range(1000):
+            for i in range(30000):
                 fo.write(fi.readline())
