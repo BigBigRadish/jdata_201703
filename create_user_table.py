@@ -16,7 +16,7 @@ USER_TABLE_FILE = "data/user_table.csv"
 
 
 def get_from_jdata_user():
-　　　　# 从做完年龄映射的NEW_USER_FILE中读取,
+    # 从做完年龄映射的NEW_USER_FILE中读取,
     # 这步之前需要先运行explore_data.py中
     # 的tranform_user_age函数
     df_usr = pd.read_csv(NEW_USER_FILE, header=0)
