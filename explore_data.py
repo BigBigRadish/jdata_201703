@@ -72,5 +72,9 @@ def explore_action_02(chunk_size=100000):
 
     print(df[df["user_id"] == 27630])
 
-# explore_user()
-explore_action_02()
+if __name__ == "__main__":
+    # 进行年龄映射
+    tranform_user_age()
+
+    # explore_user()
+    explore_action_02()
