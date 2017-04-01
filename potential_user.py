@@ -66,9 +66,9 @@ def find_potential_user():
 
     df_ac = []
     df_ac.append(ui_record_in_batch_data(ACTION_201602_FILE, ui_pair))
-    df_ac.append(ui_record_in_batch_data(fname=ACTION_201603_FILE))
-    df_ac.append(ui_record_in_batch_data(fname=ACTION_201603_EXTRA_FILE))
-    df_ac.append(ui_record_in_batch_data(fname=ACTION_201604_FILE))
+    df_ac.append(ui_record_in_batch_data(ACTION_201603_FILE, ui_pair))
+    df_ac.append(ui_record_in_batch_data(ACTION_201603_EXTRA_FILE, ui_pair))
+    df_ac.append(ui_record_in_batch_data(ACTION_201604_FILE, ui_pair))
 
     df_ac = pd.concat(df_ac, ignore_index=True)
     df_ac = df_ac.drop_duplicates()
