@@ -16,31 +16,52 @@ NEW_USER_FILE = "data/JData_User_New.csv"
 pd.options.display.float_format = '{:,.3f}'.format
 
 
+def convert_age(age_str):
+    if age_str == u'-1':
+        return -1
+    elif age_str == u'15岁以下':
+        return 0
+    elif age_str == u'16-25岁':
+        return 1
+    elif age_str == u'26-35岁':
+        return 2
+    elif age_str == u'36-45岁':
+        return 3
+    elif age_str == u'46-55岁':
+        return 4
+    elif age_str == u'56岁以上':
+        return 5
+    else:
+        return -1
+
 def tranform_user_age():
     # Load data, header=0 means that the file has column names
     df = pd.read_csv(USER_FILE, header=0, encoding="gbk")
+    # for i in range(len(df['age'])):
+    #     print(i)
+    #     if df['age'][i] == u"15岁以下":
+    #         df['age'][i] = 0
+    #     elif df['age'][i] == u"16-25岁":
+    #         df['age'][i] = 1
+    #     elif df['age'][i] == u"26-35岁":
+    #         df['age'][i] = 2
+    #     elif df['age'][i] == u"36-45岁":
+    #         df['age'][i] = 3
+    #     elif df['age'][i] == u"46-55岁":
+    #         df['age'][i] = 4
+    #     elif df['age'][i] == u"56岁以上":
+    #         df['age'][i] = 5
+    #     else:
+    #         df['age'][i] = -1
 
-    for i in range(len(df['age'])):
-        if df['age'][i] == u"15岁以下":
-            df['age'][i] = 0
-        elif df['age'][i] == u"16-25岁":
-            df['age'][i] = 1
-        elif df['age'][i] == u"26-35岁":
-            df['age'][i] = 2
-        elif df['age'][i] == u"36-45岁":
-            df['age'][i] = 3
-        elif df['age'][i] == u"46-55岁":
-            df['age'][i] = 4
-        elif df['age'][i] == u"56岁以上":
-            df['age'][i] = 5
-        else:
-            df['age'][i] = -1
+    df['age'] = df['age'].map(convert_age)
+    df['user_reg_tm'] = pd.to_datetime(df['user_reg_tm'])
+    min_date = min(df['user_reg_tm'])
 
-    df['user_reg_dt'] = pd.to_datetime(df['user_reg_dt'])
-    min_date = min(df['user_reg_dt'])
-    df['user_reg_diff'] = [int(i.days) for i in (df['user_reg_dt'] - min_date)]
+    df['user_reg_diff'] = [i for i in (df['user_reg_tm'] - min_date).dt.days]
 
     df.to_csv(NEW_USER_FILE, index=False)
+
 
 
 def explore_user():
@@ -77,4 +98,4 @@ if __name__ == "__main__":
     tranform_user_age()
 
     # explore_user()
-    explore_action_02()
+    # explore_action_02()
